@@ -3,6 +3,7 @@ package com.example.room.Dao;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.room.Entity.UserEntity;
 
@@ -15,4 +16,10 @@ public interface UserDao {
 
     @Query("SELECT * FROM user")
     List<UserEntity> getAllUsers();
+
+    @Query("SELECT * FROM user WHERE name = :userName")
+    List<UserEntity> findUserByName(String userName);
+
+    @Update
+    void updateUser(UserEntity entity);
 }

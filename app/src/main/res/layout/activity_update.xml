@@ -5,12 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".UpdateActivity">
 
     <EditText
         android:id="@+id/edtNameUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="348dp"
+        android:layout_height="48dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:ems="10"
@@ -21,8 +21,8 @@
 
     <EditText
         android:id="@+id/edtAddressUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="348dp"
+        android:layout_height="48dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="96dp"
         android:ems="10"
@@ -33,19 +33,14 @@
 
     <Button
         android:id="@+id/btnUpdateUser"
-        android:layout_width="124dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="172dp"
-        android:text="Thêm"
+        android:layout_width="275dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="180dp"
+        android:text="Sửa"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="410dp"
-        android:layout_height="354dp"
-        android:layout_marginTop="248dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+

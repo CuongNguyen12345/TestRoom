@@ -43,6 +43,6 @@ public class UserEntity {
     @NonNull
     @Override
     public String toString() {
-        return name + " " + address;
+        return id + " " + name + " " + address;
     }
 }

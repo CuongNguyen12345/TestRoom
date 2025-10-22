@@ -1,10 +1,13 @@
 package com.example.room;
 
+import static android.widget.Toast.LENGTH_SHORT;
+
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.room.Custom.UserAdapter;
 import com.example.room.Database.AppDatabase;
 import com.example.room.Entity.UserEntity;
 
@@ -21,21 +25,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtName, edtAddress;
-    private Button btnAdd;
+    private Button btnAdd, btnUpdate;
     private ListView listView;
-    private ArrayAdapter<UserEntity> adapter;
+    private UserAdapter adapter;
     private List<UserEntity> list = new ArrayList<>();
 
-    private void initUI() {
-        edtName = findViewById(R.id.edtName);
-        edtAddress = findViewById(R.id.edtAddress);
-        btnAdd = findViewById(R.id.btnAdd);
-        listView = findViewById(R.id.listView);
 
-        list = AppDatabase.getInstance(this).userDao().getAllUsers();
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +39,56 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initUI();
+        loadData();
         btnAdd.setOnClickListener(v -> {
-            String name = edtName.getText().toString();
-            String address = edtAddress.getText().toString();
-
-            UserEntity entity = new UserEntity(name, address);
-            AppDatabase.getInstance(this).userDao().insertUser(entity);
-            list = AppDatabase.getInstance(this).userDao().getAllUsers();
-            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-            listView.setAdapter(adapter);
+            String name = edtName.getText().toString().trim();
+            String address = edtAddress.getText().toString().trim();
+            addUser(name, address);
         });
 
+        btnUpdate.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
+            Bundle bundle = new Bundle();
+//            bundle.putSerializable("object_user", );
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void addUser(String name, String address) {
+        if(name == null || address == null) {
+            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", LENGTH_SHORT).show();
+            return;
+        }
+        if(isUserExist(name)) {
+            Toast.makeText(this, "Người dùng đã tồn tại", LENGTH_SHORT).show();
+            return;
+        }
+        UserEntity entity = new UserEntity(name, address);
+        AppDatabase.getInstance(this).userDao().insertUser(entity);
+        loadData();
+        edtName.setText("");
+        edtAddress.setText("");
+    }
+    private boolean isUserExist(String userName) {
+        List<UserEntity> list = AppDatabase.getInstance(this).userDao().findUserByName(userName);
+        return list != null && !list.isEmpty();
+    }
+
+    private void loadData() {
+        list = AppDatabase.getInstance(this).userDao().getAllUsers();
+        adapter = new UserAdapter(this, list);
+        listView.setAdapter(adapter);
+    }
+    private void initUI() {
+        edtName = findViewById(R.id.edtNameUpdate);
+        edtAddress = findViewById(R.id.edtAddressUpdate);
+        btnAdd = findViewById(R.id.btnUpdateUser);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        listView = findViewById(R.id.listView);
     }
 }
