@@ -33,13 +33,22 @@
 
     <Button
         android:id="@+id/btnUpdateUser"
-        android:layout_width="275dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="180dp"
+        android:layout_width="173dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="172dp"
         android:text="Sửa"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnReturn"
+        android:layout_width="173dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="172dp"
+        android:layout_marginEnd="16dp"
+        android:text="Đóng"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

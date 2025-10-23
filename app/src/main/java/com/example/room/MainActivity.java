@@ -46,11 +46,7 @@ public class MainActivity extends AppCompatActivity {
             addUser(name, address);
         });
 
-        btnUpdate.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, UpdateActivity.class);
-            Bundle bundle = new Bundle();
-//            bundle.putSerializable("object_user", );
-        });
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
