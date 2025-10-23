@@ -1,6 +1,7 @@
 package com.example.room.Dao;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -22,4 +23,7 @@ public interface UserDao {
 
     @Update
     void updateUser(UserEntity entity);
+
+    @Delete
+    void deleteUser(UserEntity entity);
 }
