@@ -1,6 +1,5 @@
 package com.example.room;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,7 +39,7 @@ public class UpdateActivity extends AppCompatActivity {
         btnUpdateUser.setOnClickListener(v -> {
             String name = edtNameUpdate.getText().toString().trim();
             String address = edtAddressUpadte.getText().toString().trim();
-            if(!DataUtils.checkData(name) || !DataUtils.checkData(address)) {
+            if (!DataUtils.checkData(name) || !DataUtils.checkData(address)) {
                 return;
             }
             entity.setName(name);
